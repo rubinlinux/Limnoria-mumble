@@ -204,6 +204,7 @@ class Mumble(callbacks.Plugin):
         text = "Message from {} in {}: {}".format(msg.nick, msg.args[0], text)
         
         opts = dict(opts)
+        sent = False
 
         if 'tree' in opts:
             tree = opts['tree']
@@ -216,7 +217,6 @@ class Mumble(callbacks.Plugin):
             sent = True    
         else:
             channels = self.GetMumbleChannels()
-            sent = False
             
             for id, channel in channels.items():
                 if opts['dest'] == channel['id'] or opts['dest'].lower() == channel['name'].lower() :
