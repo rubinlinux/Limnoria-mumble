@@ -197,7 +197,7 @@ class Mumble(callbacks.Plugin):
 
         Sends a message <message> to a channel or user <dest> on the mumble server. 
         <dest> is optional and defaults to the root channel. The optional argument <tree> 
-        defines if the message is send to subchannels of <dest> (only applies if <dest> 
+        defines if the message is sent to subchannels of <dest> (only applies if <dest> 
         is a channel and not a user). Default of <tree> is 'True'.
         """
         
