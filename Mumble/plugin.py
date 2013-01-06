@@ -239,8 +239,8 @@ class Mumble(callbacks.Plugin):
                         sent = True
                         break
                 
-            if not sent:
-                msg_txt = "Unknown mumble channel or user '{}'".format(sendto)
+        if not sent:
+            msg_txt = "Unknown mumble channel or user '{}'".format(sendto)
                 
         irc.reply(msg_txt)
         
