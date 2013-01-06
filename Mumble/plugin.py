@@ -136,15 +136,13 @@ class Mumble(callbacks.Plugin):
                     self.SayChannels(irc, '{} has left mumble'.format(name))
                     usernames.remove(name)
 
-    def GetMumbleChannels(self, type='dict'):
+    def GetMumbleChannels(self):
         """Obtain a list of channels"""
         tmp = self.server.getChannels()
 
-        if type == 'dict':
-            channels = {}
-            for key in tmp:
-                c = tmp[key]
-
+        channels = {}
+        for key in tmp:
+            c = tmp[key]
             channels[str(c.id)] = {"id" : str(c.id),
                                     "name" : str(c.name),
                                     "parent" : str(c.parent),
@@ -217,8 +215,8 @@ class Mumble(callbacks.Plugin):
             sent = True    
         else:
             channels = self.GetMumbleChannels()
-            
             for id, channel in channels.items():
+                #print(channel['name'].lower())
                 if opts['dest'] == channel['id'] or opts['dest'].lower() == channel['name'].lower() :
                     self.server.sendMessageChannel(int(channel['id']), tree, text)
                     msg_txt = "Message sent to mumble channel '{}'".format(channel['name'])
