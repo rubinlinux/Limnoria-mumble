@@ -201,6 +201,8 @@ class Mumble(callbacks.Plugin):
         is a channel and not a user). Default of <tree> is 'True'.
         """
         
+        text = "Message from {} in {}: {}".format(msg.nick, msg.args[0], text)
+        
         opts = dict(opts)
 
         if 'tree' in opts:
