@@ -37,9 +37,13 @@ import supybot.plugins as plugins
 import supybot.ircmsgs as ircmsgs
 import supybot.ircutils as ircutils
 import supybot.callbacks as callbacks
-from supybot.i18n import PluginInternationalization, internationalizeDocstring
+try:
+  from supybot.i18n import PluginInternationalization, internationalizeDocstring
+  _ = PluginInternationalization('Mumble')
+except :
+  _ = lambda x : x
+  internationalizeDocstring = lambda x : x
 
-_ = PluginInternationalization('Mumble')
 
 @internationalizeDocstring
 class Mumble(callbacks.Plugin):
@@ -112,9 +116,9 @@ class Mumble(callbacks.Plugin):
             
         name_str = ",".join(usernames)
         if len(usernames) > 0:
-            msg_str = 'Users in mumble: {}'.format(",".join(usernames))
+            msg_str = _('Users in mumble: {}').format(",".join(usernames))
         else:
-            msg_str = 'No users in mumble'
+            msg_str = _('No users in mumble')
         self.SayChannels(irc, msg_str)
             
         while(self.autoloop):
@@ -127,13 +131,13 @@ class Mumble(callbacks.Plugin):
                 try:
                     usernames.index(name)
                 except:
-                    self.SayChannels(irc, '{} has joined mumble'.format(name))
+                    self.SayChannels(irc, _('{} has joined mumble').format(name))
                     usernames.append(name)
             for name in usernames:
                 try:
                     currentusers.index(name)
                 except:
-                    self.SayChannels(irc, '{} has left mumble'.format(name))
+                    self.SayChannels(irc, _('{} has left mumble').format(name))
                     usernames.remove(name)
 
     def GetMumbleChannels(self):
@@ -151,7 +155,8 @@ class Mumble(callbacks.Plugin):
                                     "links" : c.links,
                                     "position" : int(c.position)}
         return channels
-      
+
+    @internationalizeDocstring      
     def mumblestatus(self, irc, msg, args):
         """takes no arguments
         
@@ -160,18 +165,19 @@ class Mumble(callbacks.Plugin):
         uptime = str(datetime.timedelta(seconds=self.server.getUptime()))
         running = self.server.isRunning()
         
-        msg_str = 'The server is '
+        msg_str = _('The server is ')
         
         if running:
-            msg_str += 'online and '
+            msg_str += _('online and ')
         else:
-            msg_str += 'offline and has been '
+            msg_str += _('offline and has been ')
             
-        msg_str += 'running for {}'.format(uptime)
+        msg_str += _('running for {}').format(uptime)
         
         irc.reply(msg_str)
     mumblestatus = wrap(mumblestatus)
-      
+
+    @internationalizeDocstring      
     def mumbleusers(self, irc, msg, args):
         """takes no arguments
 
@@ -184,12 +190,13 @@ class Mumble(callbacks.Plugin):
 
         name_str = ",".join(usernames)
         if len(usernames) > 0:
-            msg_str = 'Users in mumble: {}'.format(",".join(usernames))
+            msg_str = _('Users in mumble: {}').format(",".join(usernames))
         else:
-            msg_str = 'No users in mumble'
+            msg_str = _('No users in mumble')
         irc.reply(msg_str)
     mumbleusers = wrap(mumbleusers)
 
+    @internationalizeDocstring
     def mumblesend(self, irc, msg, args, opts, text):
         """[--dest <value>][--tree <True/False>] <message>
 
@@ -199,7 +206,7 @@ class Mumble(callbacks.Plugin):
         is a channel and not a user). Default of <tree> is 'True'.
         """
         
-        text = "Message from {} in {}: {}".format(msg.nick, msg.args[0], text)
+        text = _('Message from {} in {}: {}').format(msg.nick, msg.args[0], text)
         
         opts = dict(opts)
         sent = False
@@ -211,7 +218,7 @@ class Mumble(callbacks.Plugin):
 
         if 'dest' not in opts:
             self.server.sendMessageChannel(0, tree, text)
-            msg_txt = "Message sent to root channel"
+            msg_txt = _('Message sent to root channel')
             sent = True    
         else:
             channels = self.GetMumbleChannels()
@@ -219,9 +226,9 @@ class Mumble(callbacks.Plugin):
                 #print(channel['name'].lower())
                 if opts['dest'] == channel['id'] or opts['dest'].lower() == channel['name'].lower() :
                     self.server.sendMessageChannel(int(channel['id']), tree, text)
-                    msg_txt = "Message sent to mumble channel '{}'".format(channel['name'])
+                    msg_txt = _("Message sent to mumble channel '{}'").format(channel['name'])
                     if tree:
-                        msg_txt += ' and subchannels'
+                        msg_txt += _(' and subchannels')
                     sent = True
                     break
             if not sent:
@@ -233,12 +240,12 @@ class Mumble(callbacks.Plugin):
                     
                     if opts['dest'].lower() == name.lower():
                         self.server.sendMessage(session, text)
-                        msg_txt = "Message sent to mumble user '{}'".format(name)
+                        msg_txt = _("Message sent to mumble user '{}'").format(name)
                         sent = True
                         break
                 
         if not sent:
-            msg_txt = "Unknown mumble channel or user '{}'".format(opts['dest'])
+            msg_txt = _("Unknown mumble channel or user '{}'").format(opts['dest'])
                 
         irc.reply(msg_txt)
         
