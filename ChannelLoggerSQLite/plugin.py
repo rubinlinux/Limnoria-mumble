@@ -78,19 +78,19 @@ class ChannelLoggerSQLite(callbacks.Plugin):
     def die(self):
         return
        
-    #def __call__(self, irc, msg):
-        #try:
-            ## I don't know why I put this in, but it doesn't work, because it
-            ## doesn't call doNick or doQuit.
-            ## if msg.args and irc.isChannel(msg.args[0]):
-            #self.__parent.__call__(irc, msg)
-            #if irc in self.lastMsgs:
-                #if irc not in self.lastStates:
-                    #self.lastStates[irc] = irc.state.copy()
-                #self.lastStates[irc].addMsg(irc, self.lastMsgs[irc])
-        #finally:
-            ## We must make sure this always gets updated.
-            #self.lastMsgs[irc] = msg
+    def __call__(self, irc, msg):
+        try:
+            # I don't know why I put this in, but it doesn't work, because it
+            # doesn't call doNick or doQuit.
+            # if msg.args and irc.isChannel(msg.args[0]):
+            self.__parent.__call__(irc, msg)
+            if irc in self.lastMsgs:
+                if irc not in self.lastStates:
+                    self.lastStates[irc] = irc.state.copy()
+                self.lastStates[irc].addMsg(irc, self.lastMsgs[irc])
+        finally:
+            # We must make sure this always gets updated.
+            self.lastMsgs[irc] = msg
 
     def reset(self):
         self.lastMsgs.clear()
@@ -232,8 +232,7 @@ class ChannelLoggerSQLite(callbacks.Plugin):
             reason = ""
         if not isinstance(irc, irclib.Irc):
             irc = irc.getRealIrc()
-        #for (channel, chan) in list(self.lastStates[irc].channels.items()):
-        for channel in msg.args[0].split(','):
+        for (channel, chan) in list(self.lastStates[irc].channels.items()):
             if(self.registryValue('showJoinParts', channel)):
                 if msg.nick in chan.users:
                     sqlite_data = {
