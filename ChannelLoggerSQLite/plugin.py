@@ -239,7 +239,7 @@ class ChannelLoggerSQLite(callbacks.Plugin):
                         'channel': channel,
                         'nick': msg.nick,
                         'action': msg.command,
-                        'msg': ' %s <%s> has quit IRC%s'.format(msg.nick, msg.prefix, reason) }
+                        'msg': ' {} <{}> has quit IRC{}'.format(msg.nick, msg.prefix, reason) }
                     self.doLog(irc, sqlite_data, channel)
 
     def outFilter(self, irc, msg):
