@@ -232,7 +232,8 @@ class ChannelLoggerSQLite(callbacks.Plugin):
             reason = ""
         if not isinstance(irc, irclib.Irc):
             irc = irc.getRealIrc()
-        for (channel, chan) in list(self.lastStates[irc].channels.items()):
+        #for (channel, chan) in list(self.lastStates[irc].channels.items()):
+        for channel in msg.args[0].split(','):
             if(self.registryValue('showJoinParts', channel)):
                 if msg.nick in chan.users:
                     sqlite_data = {
