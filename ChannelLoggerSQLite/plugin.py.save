@@ -29,6 +29,7 @@
 ###
 
 import sqlite3
+from 
 import os
 
 import supybot.conf as conf
@@ -102,22 +103,19 @@ class ChannelLoggerSQLite(callbacks.Plugin):
             os.makedirs(logDir)
         return logDir
 
+
     def getLog(self, irc):
         return
-      
+
     def doLog(self, irc, sqlite_data, channel):
         if not self.registryValue('enable', channel):
             return
         if len(sqlite_data) == 4:
-
-            # Force re-encoding of message string to work around
-            # malformed chars in log
-            msg_txt = sqlite_data.encode().decode('utf-8')
   
             with self.logconn:
                 cur = self.logconn.cursor()
 
-                data = (sqlite_data['channel'], sqlite_data['nick'], sqlite_data['action'], msg_txt)
+                data = (sqlite_data['channel'], sqlite_data['nick'], sqlite_data['action'], sqlite_data['msg'])
                 cur.execute('INSERT INTO Log VALUES(CURRENT_TIMESTAMP, ?, ?, ?, ?)', data)
 
     def doPrivmsg(self, irc, msg):
