@@ -112,7 +112,7 @@ class ChannelLoggerSQLite(callbacks.Plugin):
 
             # Force re-encoding of message string to work around
             # malformed chars in log
-            msg_txt = sqlite_data.encode().decode('utf-8')
+            msg_txt = sqlite_data['msg'].encode().decode('utf-8')
   
             with self.logconn:
                 cur = self.logconn.cursor()
