@@ -109,10 +109,6 @@ class ChannelLoggerSQLite(callbacks.Plugin):
         if not self.registryValue('enable', channel):
             return
         if len(sqlite_data) == 4:
-
-            # Force re-encoding of message string to work around
-            # malformed chars in log
-            msg_txt = sqlite_data['msg'].encode().decode('utf-8')
   
             with self.logconn:
                 cur = self.logconn.cursor()
