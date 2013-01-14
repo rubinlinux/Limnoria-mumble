@@ -113,7 +113,7 @@ class ChannelLoggerSQLite(callbacks.Plugin):
             with self.logconn:
                 cur = self.logconn.cursor()
 
-                data = (sqlite_data['channel'], sqlite_data['nick'], sqlite_data['action'], msg_txt)
+                data = (sqlite_data['channel'], sqlite_data['nick'], sqlite_data['action'], sqlite_data['msg'])
                 cur.execute('INSERT INTO Log VALUES(CURRENT_TIMESTAMP, ?, ?, ?, ?)', data)
 
     def doPrivmsg(self, irc, msg):
