@@ -1,30 +1,29 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Alexander Minges <alexander.minges@gmail.com>, 2013.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Limnoria\n"
-"POT-Creation-Date: 2013-01-10 23:26+CET\n"
-"PO-Revision-Date: 2013-01-11 00:04+0100\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-01-26 00:16+CET\n"
+"PO-Revision-Date: 2013-01-26 00:26+0100\n"
 "Last-Translator: Alexander Minges <alexander.minges@gmail.com>\n"
-"Language-Team: German <alexander.minges@gmail.com>\n"
+"Language-Team: Deutsch <alexander.minges@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: de\n"
-"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: config.py:49
 msgid "Server IP of murmur"
-msgstr "IP-Adresse des Servers"
+msgstr "IP-Adresse des Murmur-Servers"
 
 #: config.py:51
 msgid "Murmur port to connect to"
-msgstr "Murmur-Port zu dem verbunden werden soll"
+msgstr "Murmur-Port zu welchem verbunden werden soll"
 
 #: config.py:53
 msgid "Path to Murmur.ice"
@@ -36,7 +35,7 @@ msgstr "Passwort zum Verbinden mit Murmur"
 
 #: config.py:57
 msgid "Channels to announce mumble changes to"
-msgstr "IRC Channels in denen Änderungen in Mumble angekündig werden sollen"
+msgstr "Kanäle in denen Änderungen aus Mumble angekündig werden sollen"
 
 #: config.py:59
 msgid "Interval to check for new online users in murmur"
@@ -46,37 +45,44 @@ msgstr ""
 
 #: plugin.py:50
 msgid ""
-"Add the help for \"@plugin help Mumble\" here\n"
-"    This should describe *how* to use this plugin."
+"The Mumble plugin monitors the status of a Mumble server (murmur)\n"
+"       and provides commands to send messaged directly to channels/users on\n"
+"       the Mumble server."
 msgstr ""
+"Das Mumble-Plugin überwacht den Status eines Mumble-Servers (murmur)\n"
+"       und stellt Kommandos zur Verfügung, um Nachrichten direct an Kanäle/"
+"Benutzer auf\n"
+"       dem Mumble-Server zu senden."
 
-#: plugin.py:111
-msgid "Periodically check for new users in mumble and announce to channel(s)"
+#: plugin.py:115
+msgid ""
+"Periodically check for new users in mumble and announce \n"
+"           to channel(s)"
 msgstr ""
 "Periodisch nach neu angemeldeten Benutzern in Mumble suchen und diese im IRC "
 "ankündigen."
 
-#: plugin.py:119 plugin.py:193
+#: plugin.py:124 plugin.py:197
 msgid "Users in mumble: {}"
 msgstr "Benutzer in Mumble: {}"
 
-#: plugin.py:121 plugin.py:195
+#: plugin.py:126 plugin.py:199
 msgid "No users in mumble"
-msgstr "Keine Benutzer in Mumble"
+msgstr "Keine Benutzer in Mumble."
 
-#: plugin.py:134
+#: plugin.py:139
 msgid "{} has joined mumble"
-msgstr "{} hat Mumble betreten"
+msgstr "{} hat Mumble betreten."
 
-#: plugin.py:140
+#: plugin.py:145
 msgid "{} has left mumble"
-msgstr "{} hat Mumble verlassen"
+msgstr "{} hat Mumble verlassen."
 
-#: plugin.py:144
+#: plugin.py:149
 msgid "Obtain a list of channels"
 msgstr "Eine Liste der Kanäle erhalten"
 
-#: plugin.py:161
+#: plugin.py:165
 msgid ""
 "takes no arguments\n"
 "        \n"
@@ -85,26 +91,26 @@ msgid ""
 msgstr ""
 "akzeptiert keine Argumente\n"
 "        \n"
-"        Liefert eine Statussmeldung des Mumble-Servers zurück\n"
+"        Liefert eine Statusmeldung des Mumble-Servers zurück\n"
 "        "
 
-#: plugin.py:168
+#: plugin.py:172
 msgid "The server is "
 msgstr "Der Server ist "
 
-#: plugin.py:171
-msgid "online and "
-msgstr "online und "
-
-#: plugin.py:173
-msgid "offline and has been "
-msgstr "offline und "
-
 #: plugin.py:175
-msgid "running for {}"
-msgstr "läuft/lief seit/für {}"
+msgid "online and "
+msgstr "online und läuft seit "
 
-#: plugin.py:182
+#: plugin.py:177
+msgid "offline and has been "
+msgstr "offline und lief für "
+
+#: plugin.py:179
+msgid "running for {}"
+msgstr "{}"
+
+#: plugin.py:186
 msgid ""
 "takes no arguments\n"
 "\n"
@@ -116,21 +122,20 @@ msgstr ""
 "        Liefert eine Liste der vebundenen Mumble-Benutzer\n"
 "        "
 
-#: plugin.py:201
+#: plugin.py:205
 msgid ""
 "[--dest <value>][--tree <True/False>] <message>\n"
 "\n"
-"        Sends a message <message> to a channel or user <dest> on the mumble "
-"server. \n"
-"        <dest> is optional and defaults to the root channel. The optional "
-"argument <tree> \n"
-"        defines if the message is sent to subchannels of <dest> (only "
-"applies if <dest> \n"
-"        is a channel and not a user). Default of <tree> is 'True'.\n"
+"        Sends a message <message> to a channel or user <dest> on the "
+"mumble \n"
+"        server. <dest> is optional and defaults to the root channel. \n"
+"        The optional argument <tree> defines if the message is sent to \n"
+"        subchannels of <dest> (only applies if <dest> is \n"
+"        a channel and not a user). Default of <tree> is 'True'.\n"
 "        "
 msgstr ""
-"[--dest <value>][--tree <True/False>] <Nachricht>\n"
-"\n"
+"[--dest <Ziel>][--tree <True/False>] <Nachricht>\n"
+"\\n\n"
 "        Sendet eine <Nachricht> an den Mumble-Server. \n"
 "        --dest ist optional und gibt einen Benutzer oder Kanal als Ziel an. "
 "Ohne Angabe werden \n"
@@ -139,26 +144,26 @@ msgstr ""
 "        Nachricht auch an Unterkanäle versendet wird (Standard: ja).\n"
 "        "
 
-#: plugin.py:209
+#: plugin.py:214
 msgid "Message from {} in {}: {}"
 msgstr "Nachricht von {} in {}: {}"
 
-#: plugin.py:221
+#: plugin.py:226
 msgid "Message sent to root channel"
-msgstr "Nachricht an den Hauptkanal gesendet"
+msgstr "Die Nachricht wurde an den Hauptkanal gesendet."
 
-#: plugin.py:229
+#: plugin.py:236
 msgid "Message sent to mumble channel '{}'"
-msgstr "Nachricht gesendet an den Mumble-Kanal '{}'"
+msgstr "Die Nachricht wurde gesendet an den Mumble-Kanal '{}'"
 
-#: plugin.py:231
+#: plugin.py:238
 msgid " and subchannels"
 msgstr " und Unterkanäle"
 
-#: plugin.py:243
+#: plugin.py:250
 msgid "Message sent to mumble user '{}'"
-msgstr "Nachricht an den Mumble-Benutzer '{}' versandt"
+msgstr "Die Nachricht wurde an den Mumble-Benutzer '{}' gesendet."
 
-#: plugin.py:248
+#: plugin.py:255
 msgid "Unknown mumble channel or user '{}'"
-msgstr "Unbekannter Mumble-Kanal oder -Benutzer '{}'"
+msgstr "Unbekannter Mumble-Kanal oder -Benutzer '{}'."

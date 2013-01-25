@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-10 23:26+CET\n"
+"POT-Creation-Date: 2013-01-26 00:16+CET\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,37 +42,40 @@ msgstr ""
 #: plugin.py:50
 #, docstring
 msgid ""
-"Add the help for \"@plugin help Mumble\" here\n"
-"    This should describe *how* to use this plugin."
+"The Mumble plugin monitors the status of a Mumble server (murmur)\n"
+"       and provides commands to send messaged directly to channels/users on\n"
+"       the Mumble server."
 msgstr ""
 
-#: plugin.py:111
+#: plugin.py:115
 #, docstring
-msgid "Periodically check for new users in mumble and announce to channel(s)"
+msgid ""
+"Periodically check for new users in mumble and announce \n"
+"           to channel(s)"
 msgstr ""
 
-#: plugin.py:119 plugin.py:193
+#: plugin.py:124 plugin.py:197
 msgid "Users in mumble: {}"
 msgstr ""
 
-#: plugin.py:121 plugin.py:195
+#: plugin.py:126 plugin.py:199
 msgid "No users in mumble"
 msgstr ""
 
-#: plugin.py:134
+#: plugin.py:139
 msgid "{} has joined mumble"
 msgstr ""
 
-#: plugin.py:140
+#: plugin.py:145
 msgid "{} has left mumble"
 msgstr ""
 
-#: plugin.py:144
+#: plugin.py:149
 #, docstring
 msgid "Obtain a list of channels"
 msgstr ""
 
-#: plugin.py:161
+#: plugin.py:165
 #, docstring
 msgid ""
 "takes no arguments\n"
@@ -81,23 +84,23 @@ msgid ""
 "        "
 msgstr ""
 
-#: plugin.py:168
+#: plugin.py:172
 msgid "The server is "
 msgstr ""
 
-#: plugin.py:171
+#: plugin.py:175
 msgid "online and "
 msgstr ""
 
-#: plugin.py:173
+#: plugin.py:177
 msgid "offline and has been "
 msgstr ""
 
-#: plugin.py:175
+#: plugin.py:179
 msgid "running for {}"
 msgstr ""
 
-#: plugin.py:182
+#: plugin.py:186
 #, docstring
 msgid ""
 "takes no arguments\n"
@@ -106,39 +109,40 @@ msgid ""
 "        "
 msgstr ""
 
-#: plugin.py:201
+#: plugin.py:205
 #, docstring
 msgid ""
 "[--dest <value>][--tree <True/False>] <message>\n"
 "\n"
-"        Sends a message <message> to a channel or user <dest> on the mumble server. \n"
-"        <dest> is optional and defaults to the root channel. The optional argument <tree> \n"
-"        defines if the message is sent to subchannels of <dest> (only applies if <dest> \n"
-"        is a channel and not a user). Default of <tree> is 'True'.\n"
+"        Sends a message <message> to a channel or user <dest> on the mumble \n"
+"        server. <dest> is optional and defaults to the root channel. \n"
+"        The optional argument <tree> defines if the message is sent to \n"
+"        subchannels of <dest> (only applies if <dest> is \n"
+"        a channel and not a user). Default of <tree> is 'True'.\n"
 "        "
 msgstr ""
 
-#: plugin.py:209
+#: plugin.py:214
 msgid "Message from {} in {}: {}"
 msgstr ""
 
-#: plugin.py:221
+#: plugin.py:226
 msgid "Message sent to root channel"
 msgstr ""
 
-#: plugin.py:229
+#: plugin.py:236
 msgid "Message sent to mumble channel '{}'"
 msgstr ""
 
-#: plugin.py:231
+#: plugin.py:238
 msgid " and subchannels"
 msgstr ""
 
-#: plugin.py:243
+#: plugin.py:250
 msgid "Message sent to mumble user '{}'"
 msgstr ""
 
-#: plugin.py:248
+#: plugin.py:255
 msgid "Unknown mumble channel or user '{}'"
 msgstr ""
 

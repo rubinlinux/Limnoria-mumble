@@ -47,15 +47,17 @@ except :
 
 @internationalizeDocstring
 class Mumble(callbacks.Plugin):
-    """Add the help for "@plugin help Mumble" here
-    This should describe *how* to use this plugin."""
+    """The Mumble plugin monitors the status of a Mumble server (murmur)
+       and provides commands to send messages directly to channels/users on
+       the Mumble server."""
     threaded = True
     
     def __init__(self, irc):
         self.__parent = super(Mumble, self)
         self.__parent.__init__(irc)
         
-        Ice.loadSlice('', ['-I' + Ice.getSliceDir(), self.registryValue('mumbleSlice') ] )
+        Ice.loadSlice('', ['-I' + Ice.getSliceDir(), 
+                           self.registryValue('mumbleSlice') ] )
         import Murmur
         
         prop = Ice.createProperties([])
@@ -66,9 +68,11 @@ class Mumble(callbacks.Plugin):
         idd.properties = prop
         
         self.ice = Ice.initialize(idd)
-        self.ice.getImplicitContext().put("secret", self.registryValue('mumbleSecret'))
+        self.ice.getImplicitContext().put("secret", 
+                                           self.registryValue('mumbleSecret'))
         
-        connstr = "Meta:tcp -h {} -p {}".format(self.registryValue('serverIp'), self.registryValue('serverPort'))
+        connstr = "Meta:tcp -h {} -p {}".format(self.registryValue('serverIp'), 
+                                                self.registryValue('serverPort'))
         proxy = self.ice.stringToProxy(connstr)
         
         meta = Murmur.MetaPrx.checkedCast(proxy)
@@ -108,7 +112,8 @@ class Mumble(callbacks.Plugin):
             irc.queueMsg(ircmsgs.privmsg(channel, text))
     
     def MumbleAutoLoop(self, irc):
-        """Periodically check for new users in mumble and announce to channel(s)"""
+        """Periodically check for new users in mumble and announce 
+           to channel(s)"""
         users = self.GetUsers()
         usernames = []
         for uk in users:
@@ -155,8 +160,7 @@ class Mumble(callbacks.Plugin):
                                     "links" : c.links,
                                     "position" : int(c.position)}
         return channels
-
-    @internationalizeDocstring      
+     
     def mumblestatus(self, irc, msg, args):
         """takes no arguments
         
@@ -200,10 +204,11 @@ class Mumble(callbacks.Plugin):
     def mumblesend(self, irc, msg, args, opts, text):
         """[--dest <value>][--tree <True/False>] <message>
 
-        Sends a message <message> to a channel or user <dest> on the mumble server. 
-        <dest> is optional and defaults to the root channel. The optional argument <tree> 
-        defines if the message is sent to subchannels of <dest> (only applies if <dest> 
-        is a channel and not a user). Default of <tree> is 'True'.
+        Sends a message <message> to a channel or user <dest> on the mumble 
+        server. <dest> is optional and defaults to the root channel. 
+        The optional argument <tree> defines if the message is sent to 
+        subchannels of <dest> (only applies if <dest> is 
+        a channel and not a user). Default of <tree> is 'True'.
         """
         
         text = _('Message from {} in {}: {}').format(msg.nick, msg.args[0], text)
@@ -224,8 +229,10 @@ class Mumble(callbacks.Plugin):
             channels = self.GetMumbleChannels()
             for id, channel in channels.items():
                 #print(channel['name'].lower())
-                if opts['dest'] == channel['id'] or opts['dest'].lower() == channel['name'].lower() :
-                    self.server.sendMessageChannel(int(channel['id']), tree, text)
+                if opts['dest'] == channel['id'] or 
+                   opts['dest'].lower() == channel['name'].lower() :
+                    self.server.sendMessageChannel(int(channel['id']), 
+                                                   tree, text)
                     msg_txt = _("Message sent to mumble channel '{}'").format(channel['name'])
                     if tree:
                         msg_txt += _(' and subchannels')
@@ -249,7 +256,8 @@ class Mumble(callbacks.Plugin):
                 
         irc.reply(msg_txt)
         
-    mumblesend = wrap(mumblesend, [getopts({'dest':'text', 'tree':'boolean'}), 'text'])
+    mumblesend = wrap(mumblesend, [getopts({'dest':'text', 
+                                            'tree':'boolean'}), 'text'])
 
 Class = Mumble
 
