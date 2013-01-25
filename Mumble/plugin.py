@@ -229,8 +229,8 @@ class Mumble(callbacks.Plugin):
             channels = self.GetMumbleChannels()
             for id, channel in channels.items():
                 #print(channel['name'].lower())
-                if opts['dest'] == channel['id'] or 
-                   opts['dest'].lower() == channel['name'].lower() :
+                if (opts['dest'] == channel['id'] or 
+                    opts['dest'].lower() == channel['name'].lower()) :
                     self.server.sendMessageChannel(int(channel['id']), 
                                                    tree, text)
                     msg_txt = _("Message sent to mumble channel '{}'").format(channel['name'])
