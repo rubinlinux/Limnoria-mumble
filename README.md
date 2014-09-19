@@ -1,4 +1,4 @@
-Limnoria-plugins
+Limnoria Mumble
 ================
 
 This is a mumble server interface for supybot/limnoria. It can mirror text conversations from
